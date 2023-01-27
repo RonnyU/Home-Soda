@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
+import { HomeSodaProvider } from '../context/HomeSodaProvider';
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <HomeSodaProvider>
+      <Component {...pageProps} />
+    </HomeSodaProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
