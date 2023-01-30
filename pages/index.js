@@ -4,6 +4,7 @@ import useHomeSoda from '../hooks/useHomeSoda';
 
 export default function Home() {
   const { currentCategory } = useHomeSoda();
+
   return (
     <Layout page={`Menu ${currentCategory?.name}`}>
       <h1 className='text-4xl font-black'>{currentCategory?.name}</h1>

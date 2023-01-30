@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         status: true,
       },
     });
-
+    prisma.$disconnect();
     res.status(200).json(orderUpdated);
   }
 }

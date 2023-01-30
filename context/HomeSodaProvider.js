@@ -13,6 +13,14 @@ const HomeSodaProvider = ({ children }) => {
   const [order, setOrder] = useState([]);
   const [name, setName] = useState('');
   const [total, setTotal] = useState(0);
+  const [user, setUser] = useState({
+    id: '',
+    name: '',
+    password: '',
+  });
+  const [token, setToken] = useState('');
+  const [currentAdminCategory, setCurrentAdminCategory] = useState(1);
+  const [isLoadingAdmin, setIsLoadingAdmin] = useState(false);
 
   const router = useRouter();
 
@@ -125,6 +133,34 @@ const HomeSodaProvider = ({ children }) => {
     }
   };
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const {
+      data: { user: userFound },
+    } = await axios.get('/api/users', {
+      params: {
+        name: user.name,
+        password: user.password,
+      },
+    });
+
+    if (userFound) {
+      const uniqueId = (
+        Math.floor(Math.random() * 100) + Date.now()
+      ).toString();
+      setToken(uniqueId);
+      localStorage.setItem('token', JSON.stringify(uniqueId));
+
+      router.push('/admin');
+    }
+  };
+
+  const handleClickAdminCategory = (id) => {
+    setCurrentAdminCategory(id);
+    setIsLoadingAdmin(true);
+    router.push('/admin');
+  };
+
   return (
     <HomeSodaContext.Provider
       value={{
@@ -143,6 +179,15 @@ const HomeSodaProvider = ({ children }) => {
         setName,
         handleSendOrder,
         total,
+        handleLogin,
+        user,
+        setUser,
+        token,
+        setToken,
+        currentAdminCategory,
+        handleClickAdminCategory,
+        isLoadingAdmin,
+        setIsLoadingAdmin,
       }}
     >
       {children}

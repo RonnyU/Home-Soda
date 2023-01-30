@@ -14,7 +14,7 @@ const Steps = () => {
     if (router.pathname === '/') {
       value = 2;
     } else if (router.pathname === '/summary') {
-      value = 50;
+      value = 47;
     } else {
       value = 100;
     }
@@ -29,7 +29,7 @@ const Steps = () => {
             onClick={() => {
               router.push(step.url);
             }}
-            className='text-2xl font-bold'
+            className='sm:text-2xl font-bold'
             key={step.step}
           >
             {step.name}

@@ -3,7 +3,7 @@ import { formatCurrency } from '../helpers/index';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-export default function Order({ singleOrder }) {
+export default function Order({ singleOrder, tab }) {
   const { id, name, total, order } = singleOrder;
 
   const FinishOrder = async () => {
@@ -44,16 +44,19 @@ export default function Order({ singleOrder }) {
       </div>
       <div className='md:flex md:items-center md:justify-between my-10'>
         <p className='mt-5 font-black text-4xl text-amber-500'>
-          Total a Pagar: {formatCurrency(total)}
+          {tab === 'pending' ? 'Total a Pagar:' : 'Precio Total'}{' '}
+          {formatCurrency(total)}
         </p>
-        <button
-          type='button'
-          className='bg-indigo-600 hover:bg-indigo-800 text-white 
+        {tab === 'pending' && (
+          <button
+            type='button'
+            className='bg-indigo-600 hover:bg-indigo-800 text-white 
                 mt-5 md:mt-0 py-3 px-10 uppercase font-bold rounded-lg'
-          onClick={FinishOrder}
-        >
-          Completar Orden
-        </button>
+            onClick={FinishOrder}
+          >
+            Completar Orden
+          </button>
+        )}
       </div>
     </div>
   );
