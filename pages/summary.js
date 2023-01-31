@@ -1,6 +1,6 @@
 import Layout from '../layout/Layout';
 import useHomeSoda from '../hooks/useHomeSoda';
-import ProductSummary from '../components/productSummary';
+import ProductSummary from '../components/ProductSummary';
 
 export default function Summary() {
   const { order } = useHomeSoda();
