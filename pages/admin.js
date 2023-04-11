@@ -37,6 +37,7 @@ export default function Admin() {
     }
   }, [isLoadingAdmin, setIsLoadingAdmin]);
 
+  // Logout
   const handleLogout = () => {
     setToken('');
     localStorage.removeItem('token');
